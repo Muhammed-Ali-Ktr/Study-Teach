@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Aramıza Katılın</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="onboarding-container">
+    <div class="onboarding-card">
+      <div class="onboarding-logo">
+        <img src="image/studyteach-logo.png" alt="Study Teach Logo" class="sidebar-logo-img">
+        <span class="sidebar-logo-text">Study Teach</span>
+      </div>
+      
+      <div class="onboarding-welcome-text">
+        <h1>Profilinizi Oluşturun</h1>
+        <p>Platforma erişmek ve ilerlemenizi kaydetmek için bilgilerinizi girin.</p>
+      </div>
+
+      <!-- Avatar Upload Panel -->
+      <div class="avatar-upload-container">
+        <div class="avatar-preview-box" id="avatar-click-zone" onclick="document.getElementById('avatar-file-input').click()">
+          <div class="avatar-preview-placeholder" id="avatar-placeholder">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>Fotoğraf Yükle</span>
+          </div>
+          <img class="avatar-preview-image" id="avatar-preview" src="" style="display:none;" alt="Avatar Önizleme">
+        </div>
+        <input type="file" id="avatar-file-input" style="display:none;" accept="image/*">
+      </div>
+
+      <form class="onboarding-form" id="register-form">
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="name">İsim</label>
+            <input type="text" id="name" class="form-input" placeholder="Ahmet" required>
+          </div>
+          <div class="form-group">
+            <label for="surname">Soyisim</label>
+            <input type="text" id="surname" class="form-input" placeholder="Yılmaz" required>
+          </div>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="age">Yaş</label>
+            <input type="number" id="age" class="form-input" placeholder="18" min="1" max="120" required>
+          </div>
+          <div class="form-group">
+            <label for="grade">Sınıf / Derece</label>
+            <input type="text" id="grade" class="form-input" placeholder="12. Sınıf veya Mezun" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="target-ranking">Hedef Derece / Sıralama</label>
+          <input type="text" id="target-ranking" class="form-input" placeholder="Örn: İlk 30.000, İlk 1.000..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-Posta Adresi</label>
+          <input type="email" id="email" class="form-input" placeholder="ahmet@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+        </div>
+
+        <div class="form-group" style="border-top: 1px solid var(--border-color); padding-top:1rem">
+          <label for="exam-select">🎯 Hazırlandığınız Hedef Sınavı Seçin</label>
+          <select id="exam-select" class="form-input" required>
+            <option value="yks">YKS 2027 (TYT + AYT)</option>
+            <option value="kpss">KPSS 2027 (Lisans / Önlisans)</option>
+            <option value="dgs">DGS 2027 (Dikey Geçiş Sınavı)</option>
+            <option value="mebags">MEB-AGS 2027 (Akademi Giriş Sınavı)</option>
+            <option value="ales">ALES 2027 (Lisansüstü Eğitime Giriş)</option>
+            <option value="yokdil">YÖKDİL 2027 (YÖK Dil Sınavı)</option>
+            <option value="yds2">YDS/2 2027 (Sonbahar Yabancı Dil)</option>
+            <option value="msu">MSÜ 2027 (Milli Savunma Üni.)</option>
+            <option value="yds1">YDS/1 2027 (İlkbahar Yabancı Dil)</option>
+            <option value="yds">YDS 2027 (Genel Yabancı Dil Sınavı)</option>
+            <option value="lgs">LGS 2027 (Liselere Geçiş Sınavı)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="display:flex; align-items:flex-start; gap:0.6rem; margin-top:0.5rem">
+          <input type="checkbox" id="kvkk-consent" style="width:18px; height:18px; margin-top:2px; cursor:pointer;" required>
+          <label for="kvkk-consent" style="font-size:0.775rem; color:var(--text-secondary); cursor:pointer; line-height:1.4">
+            <a href="kvkk.html" target="_blank" onclick="openKvkkModal(event)" style="color:var(--accent); font-weight:700; text-decoration:underline">KVKK Aydınlatma Metni ve Gizlilik Sözleşmesini</a> okudum, kabul ediyorum. <span style="color:var(--status-danger-text)">*</span>
+          </label>
+        </div>
+
+        <button type="submit" class="form-btn" style="margin-top: 0.5rem;">
+          <span>Kayıt Ol ve Başla &rarr;</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shared data & engine -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  
+  <!-- Onboarding page registration script -->
+  <script>
+    let avatarBase64 = "";
+
+    document.getElementById('avatar-file-input').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          avatarBase64 = evt.target.result;
+          const img = document.getElementById('avatar-preview');
+          const placeholder = document.getElementById('avatar-placeholder');
+          img.src = avatarBase64;
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Form Submit
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const kvkkCheck = document.getElementById('kvkk-consent');
+      if (!kvkkCheck || !kvkkCheck.checked) {
+        showToast("⚠️ Kayıt olmadan önce KVKK Aydınlatma Metnini onaylamalısınız.", "warning");
+        return;
+      }
+
+      const profile = {
+        name: document.getElementById('name').value,
+        surname: document.getElementById('surname').value,
+        age: document.getElementById('age').value,
+        grade: document.getElementById('grade').value,
+        targetRanking: document.getElementById('target-ranking').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        avatar: avatarBase64,
+        kvkkConsent: true,
+        kvkkConsentDate: new Date().toISOString()
+      };
+
+      const selectedExam = document.getElementById('exam-select').value;
+
+      localStorage.setItem("studyteach_profile", JSON.stringify(profile));
+      localStorage.setItem("studyteach_active_exam", selectedExam);
+      localStorage.setItem("studytrack_profile", JSON.stringify(profile));
+      localStorage.setItem("studytrack_active_exam", selectedExam);
+      
+      // Initialize an empty study progress schema for the new user if it doesn't exist
+      const progressKey = `studyteach_progress_${profile.email}`;
+      if (!localStorage.getItem(progressKey)) {
+        localStorage.setItem(progressKey, JSON.stringify({ completed: {}, stars: {} }));
+        localStorage.setItem(`studytrack_progress_${profile.email}`, JSON.stringify({ completed: {}, stars: {} }));
+      }
+
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>

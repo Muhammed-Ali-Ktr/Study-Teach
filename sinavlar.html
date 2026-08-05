@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Sınavlar ve Denemeler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-layout">
+    
+    <main class="main-content">
+      
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <h1 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem">Sınav Detayları</h1>
+        <div style="font-size:0.775rem; color:var(--text-muted); font-weight:600">Anasayfa &gt; Sınavlar</div>
+      </div>
+
+      <!-- 1. Large Countdown Card -->
+      <div class="countdown-box-large">
+        <span class="countdown-box-title" id="countdown-banner-title">YKS 2027 Sınavına Kalan Süre</span>
+        <div class="countdown-timer-large">
+          <div class="countdown-time-unit">
+            <span class="countdown-unit-val" id="timer-days">00</span>
+            <span class="countdown-unit-lbl">Gün</span>
+          </div>
+          <div class="countdown-time-unit">
+            <span class="countdown-unit-val" id="timer-hours">00</span>
+            <span class="countdown-unit-lbl">Saat</span>
+          </div>
+          <div class="countdown-time-unit">
+            <span class="countdown-unit-val" id="timer-minutes">00</span>
+            <span class="countdown-unit-lbl">Dakika</span>
+          </div>
+          <div class="countdown-time-unit" style="background-color:rgba(255,255,255,0.25)">
+            <span class="countdown-unit-val" id="timer-seconds">00</span>
+            <span class="countdown-unit-lbl">Saniye</span>
+          </div>
+        </div>
+        <span class="countdown-box-target-date" id="timer-target-date">Sınav Tarihi: 19 Haziran 2027 Cumartesi</span>
+      </div>
+
+      <!-- 2. Dual block layout: Information and Score Tracker -->
+      <div class="exam-info-grid">
+        
+        <!-- Left: Sınav Bilgileri -->
+        <div class="card-widget">
+          <div class="card-widget-header">
+            <h3 class="card-widget-title">ℹ️ Sınav Hakkında Genel Bilgiler</h3>
+          </div>
+          
+          <div style="display:flex; flex-direction:column; gap:1.25rem; font-size:0.875rem; line-height:1.6">
+            <div>
+              <strong style="color:var(--text-primary)" id="info-exam-name">YKS Sınavı</strong>
+              <p style="color:var(--text-secondary); margin-top:4px" id="info-exam-desc">Yükseköğretim Kurumları Sınavı (YKS), lisans ve önlisans programlarına yerleşmek isteyen adayların girmesi gereken ulusal düzeydeki sınavdır. Temel Yeterlilik Testi (TYT) ve Alan Yeterlilik Testi (AYT) olmak üzere iki ana oturumdan oluşur.</p>
+            </div>
+            
+            <div style="border-top:1px solid var(--border-color); padding-top:1rem">
+              <strong style="color:var(--text-primary)">Sınav Bölümleri & Soru Dağılımları</strong>
+              <ul style="margin-left:1.5rem; margin-top:0.5rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.4rem" id="info-exam-list">
+                <!-- Loaded dynamically -->
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Deneme Net Takipçisi -->
+        <div class="card-widget">
+          <div class="card-widget-header">
+            <h3 class="card-widget-title">📈 Deneme Sonuç Takipçisi</h3>
+            <button class="btn-primary" style="padding:0.35rem 0.75rem; font-size:0.75rem" onclick="openAddScoreModal()">Yeni Sonuç Ekle</button>
+          </div>
+          
+          <!-- Mock scores rows -->
+          <div class="scores-list" id="scores-container">
+            <!-- Dynamically loaded -->
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Score Adding Modal -->
+  <div class="modal-overlay" id="score-modal-overlay">
+    <div class="modal-box" style="max-width: 440px">
+      <div class="modal-header">
+        <h3>Yeni Deneme Sonucu</h3>
+        <button class="modal-close-btn" onclick="closeScoreModal()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      
+      <div class="modal-body" style="gap:1rem">
+        <div class="form-group">
+          <label for="score-name">Deneme Adı / Yayın</label>
+          <input type="text" id="score-name" class="form-input" placeholder="Örn: 3D Türkiye Geneli TYT-1">
+        </div>
+        
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="score-correct">Doğru</label>
+            <input type="number" id="score-correct" class="form-input" min="0" max="200" value="0">
+          </div>
+          <div class="form-group">
+            <label for="score-wrong">Yanlış</label>
+            <input type="number" id="score-wrong" class="form-input" min="0" max="200" value="0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="score-empty">Boş</label>
+          <input type="number" id="score-empty" class="form-input" min="0" max="200" value="0">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeScoreModal()">İptal</button>
+        <button class="btn-primary" onclick="saveNewScore()">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        initSınavlarPage();
+      }, 50);
+    });
+  </script>
+</body>
+</html>

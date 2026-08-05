@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Core App Layout container -->
+  <div id="app-layout">
+    
+    <main class="main-content">
+      
+      <!-- 1. Large Showcase Banner -->
+      <div class="progress-showcase-card">
+        <div class="progress-showcase-info">
+          <div class="progress-showcase-percentage" id="general-pct-val">%0</div>
+          <div class="progress-showcase-label">Genel İlerleme Durumun</div>
+          <div class="progress-showcase-subtext" id="general-count-val">Toplam 0 konudan 0'ını tamamladın.</div>
+          <div class="progress-showcase-target" id="general-target-val">🎯 Hedefin: İlk 30.000</div>
+          <div class="progress-showcase-bar-wrapper">
+            <div class="progress-showcase-bar">
+              <div class="progress-showcase-fill" id="general-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+        <div class="progress-showcase-illustration">
+          <span style="font-size: 5rem; select: none;">🏆</span>
+        </div>
+      </div>
+
+      <!-- 2. Grid Widgets -->
+      <div class="dashboard-grid">
+        
+        <!-- Left Column -->
+        <div class="dash-main-col">
+          
+          <!-- Today's Targets Checklist -->
+          <div class="card-widget">
+            <div class="card-widget-header">
+              <h3 class="card-widget-title">📌 Bugünkü Hedefin</h3>
+              <button class="btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.75rem" onclick="addNewTargetPrompt()">Hedef Ekle</button>
+            </div>
+            <div class="today-targets-list" id="targets-list-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Course Progress List -->
+          <div class="card-widget">
+            <div class="card-widget-header">
+              <h3 class="card-widget-title">📚 Derslere Göre İlerleme</h3>
+              <a href="konular.html" class="card-widget-link">Tüm Dersleri Gör &rarr;</a>
+            </div>
+            <div class="course-progress-list" id="course-progress-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Weekly Activity Chart -->
+          <div class="card-widget">
+            <div class="card-widget-header">
+              <h3 class="card-widget-title">📊 Haftalık Çalışma Grafiği</h3>
+              <span class="filter-stat-badge" style="background-color: var(--accent-light); color: var(--accent); font-size: 0.7rem; font-weight: 700;">Son 7 Gün</span>
+            </div>
+            <div class="bar-chart-container">
+              <div class="chart-bar-area" id="weekly-bars-container">
+                <!-- Rendered dynamically -->
+              </div>
+              
+              <div class="chart-bar-footer">
+                <div class="chart-footer-stat">
+                  <div class="chart-footer-stat-icon">⏰</div>
+                  <div class="chart-footer-stat-data">
+                    <span class="chart-footer-stat-val" id="total-study-time">0sa 0dk</span>
+                    <span class="chart-footer-stat-lbl">Toplam Çalışma Süresi</span>
+                  </div>
+                </div>
+                <div class="chart-footer-stat">
+                  <div class="chart-footer-stat-icon">📈</div>
+                  <div class="chart-footer-stat-data">
+                    <span class="chart-footer-stat-val" id="avg-study-time">0sa 0dk</span>
+                    <span class="chart-footer-stat-lbl">Ortalama / Gün</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="dash-sidebar-col">
+          
+          <!-- Mock Exams Checklist -->
+          <div class="card-widget">
+            <div class="card-widget-header">
+              <h3 class="card-widget-title">📅 Yaklaşan Sınavlar & Denemeler</h3>
+              <a href="sinavlar.html" class="card-widget-link">Tümünü Gör</a>
+            </div>
+            <div class="mocks-list" id="mocks-list-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- VIP Temalar & Görünüm Widget (VIP) -->
+          <div class="card-widget" style="border: 1px solid var(--accent); background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(217, 70, 239, 0.05) 100%), var(--bg-sidebar);">
+            <div class="card-widget-header">
+              <h3 class="card-widget-title" style="display:flex; align-items:center; gap:0.4rem">🎨 VIP Özel Temalar & Görünüm</h3>
+              <span class="filter-stat-badge" style="background-color:gold; color:#000; font-weight:800; font-size:0.65rem">VIP PRO</span>
+            </div>
+            <div id="ai-coach-container">
+              <!-- Rendered dynamically in app.js -->
+            </div>
+          </div>
+
+          <!-- Suggested Topics -->
+          <div class="card-widget">
+            <div class="card-widget-header">
+              <h3 class="card-widget-title">💡 Konu Önerileri</h3>
+            </div>
+            <div class="suggestions-list" id="suggestions-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Bottom elements: Motivation & Quote -->
+          <div class="motivation-card">
+            <div id="motivation-day-lbl" style="font-size:0.7rem; font-weight:800; color:var(--accent); margin-bottom:0.25rem; text-transform:uppercase">📅 Günün Motivasyonu</div>
+            <div class="motivation-quote" id="motivation-text">"Başarı, hazırlık ve fırsatın buluştuğu yerdir."</div>
+            <div class="motivation-author" id="motivation-author">- Bobby Unser</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 3. Bottom Row: Last studied topics -->
+      <div class="card-widget">
+        <div class="card-widget-header">
+          <h3 class="card-widget-title">🕒 Son Çalışılan Konular</h3>
+        </div>
+        <div class="last-studied-list" id="last-studied-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+  
+  <script>
+    // Initialize Dashboard data once engine loads
+    window.addEventListener('DOMContentLoaded', () => {
+      // Small delay to ensure shared.js has initialized user credentials
+      setTimeout(() => {
+        initDashboard();
+      }, 50);
+    });
+  </script>
+</body>
+</html>

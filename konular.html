@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Konular</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-layout">
+    
+    <main class="main-content">
+      
+      <!-- Page Breadcrumb & Header -->
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <h1 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem">Konular</h1>
+        <div style="font-size:0.775rem; color:var(--text-muted); font-weight:600">Anasayfa &gt; Konular</div>
+      </div>
+
+      <!-- 1. Subject Tabs Scroll Area -->
+      <div class="subjects-tabs-scroll-wrapper">
+        <button class="scroll-arrow-btn left" onclick="scrollTabs(-180)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        
+        <div class="subjects-tabs-scroll" id="subject-tabs-container">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <button class="scroll-arrow-btn right" onclick="scrollTabs(180)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- 2. Course Progress Info Banner -->
+      <div class="card-widget" style="padding: 1.25rem 1.75rem">
+        <div class="progress-showcase-info" style="gap: 0.75rem">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem">
+            <span style="font-size:0.875rem; font-weight:700; color:var(--text-primary)" id="course-progress-header-lbl">Ders İlerleme Durumu</span>
+            <span style="font-size:1.5rem; font-weight:800; color:var(--accent)" id="course-progress-header-pct">%0</span>
+          </div>
+          
+          <div class="progress-showcase-bar" style="height:8px">
+            <div class="progress-showcase-fill" id="course-progress-header-bar" style="width: 0%"></div>
+          </div>
+          
+          <!-- Done/Eksik/Total Stat Row -->
+          <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-top:0.25rem">
+            <div class="filter-stat-node">
+              <span class="filter-stat-label">Tamamlanan</span>
+              <span class="filter-stat-value" id="stats-done">0 <span class="filter-stat-badge" style="background-color:var(--status-success-bg); color:var(--status-success-text)">✓</span></span>
+            </div>
+            <div class="filter-stat-node">
+              <span class="filter-stat-label">Eksik</span>
+              <span class="filter-stat-value" id="stats-missing">0 <span class="filter-stat-badge" style="background-color:var(--status-warning-bg); color:var(--status-warning-text)">!</span></span>
+            </div>
+            <div class="filter-stat-node">
+              <span class="filter-stat-label">Toplam Konu</span>
+              <span class="filter-stat-value" id="stats-total">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Searching and Filters Row -->
+      <div class="topics-filter-row">
+        <!-- Search bar -->
+        <div class="search-input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input type="text" id="search-box" class="search-input-field" placeholder="Konu ara..." oninput="handleSearchFilter()">
+        </div>
+
+        <!-- Filter Selects -->
+        <div class="filter-right-inputs">
+          <select id="status-filter" class="dropdown-filter-select" onchange="handleSearchFilter()">
+            <option value="all">Durum: Tümü</option>
+            <option value="done">Durum: Tamamlananlar</option>
+            <option value="missing">Durum: Eksik Olanlar</option>
+            <option value="stars">Durum: Yıldızlı Konular</option>
+          </select>
+
+          <select id="module-filter" class="dropdown-filter-select" onchange="handleSearchFilter()">
+            <!-- Dynamic options depending on selected exam, e.g. TYT / AYT -->
+            <option value="all">Bölüm: Tümü</option>
+          </select>
+
+          <!-- Grid/List layout toggle -->
+          <div class="layout-toggle-btns">
+            <button class="layout-toggle-btn active" id="view-list-btn" onclick="toggleLayoutView('list')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+            <button class="layout-toggle-btn" id="view-grid-btn" onclick="toggleLayoutView('grid')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Accordions Container -->
+      <div class="subject-accordions-container" id="subjects-accordions-list">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Topic Detail Modal Overlay -->
+  <div class="modal-overlay" id="topic-modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-topic-title">Konu Detayları</h3>
+        <button class="modal-close-btn" onclick="closeTopicModal()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Star rating block -->
+        <div>
+          <h4 style="font-size:0.825rem; font-weight:600; color:var(--text-secondary)">Konu Anlama Seviyeniz</h4>
+          <div class="modal-stars-row" id="modal-stars-wrapper">
+            <!-- Dynamic stars -->
+          </div>
+        </div>
+
+        <!-- YouTube Video Placeholder Block -->
+        <div>
+          <h4 style="font-size:0.825rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.5rem">YouTube Konu Anlatımı</h4>
+          <div class="modal-resource-preview">
+            <span>📺</span>
+            <p id="modal-video-text">Bu konuyla ilgili YouTube videolarına hızlıca ulaşın.</p>
+            <a class="btn-primary" id="modal-video-link" href="" target="_blank" style="text-decoration:none; display:inline-block">🔗 YouTube'da Ara</a>
+          </div>
+        </div>
+
+        <!-- PDF Summary Block -->
+        <div>
+          <h4 style="font-size:0.825rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.5rem">Özet Kaynak ve Dokümanlar</h4>
+          <div class="modal-resource-preview" style="background-color:rgba(79, 70, 229, 0.02)">
+            <span>📄</span>
+            <p id="modal-pdf-text">Konu özeti ve çalışma PDF'lerini indirin.</p>
+            <a class="btn-secondary" id="modal-pdf-link" href="" target="_blank" style="text-decoration:none; display:inline-block">📂 Google PDF Ara</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeTopicModal()">Kapat</button>
+        <button class="btn-primary" id="modal-toggle-complete-btn" onclick="toggleTopicModalComplete()"> Tamamlandı İşaretle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        initSubjectsPage();
+      }, 50);
+    });
+  </script>
+</body>
+</html>

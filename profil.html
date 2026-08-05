@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Profil ve Site Ayarları</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-layout">
+    
+    <main class="main-content">
+      
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <h1 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem">Profil ve Site Ayarları</h1>
+        <div style="font-size:0.775rem; color:var(--text-muted); font-weight:600">Anasayfa &gt; Profil ve Site Ayarları</div>
+      </div>
+
+      <!-- Profile Grid Layout -->
+      <div class="profile-card-layout">
+        
+        <!-- Left: Preview & Quick Stats -->
+        <div class="card-widget profile-avatar-card">
+          <div class="avatar-upload-container">
+            <div class="avatar-preview-box" style="width:130px; height:130px; cursor:pointer" id="profile-avatar-zone" onclick="document.getElementById('profile-file-input').click()">
+              <img class="profile-avatar-large" id="profile-avatar-img" src="" alt="Profil Fotoğrafı">
+            </div>
+            <input type="file" id="profile-file-input" style="display:none;" accept="image/*">
+            <span style="font-size:0.775rem; color:var(--text-muted); font-weight:600">Değiştirmek için resme tıklayın</span>
+          </div>
+
+          <h3 style="font-family:'Outfit',sans-serif; font-size:1.15rem; font-weight:700; margin-top:0.5rem" id="profile-full-name">Ahmet Yılmaz</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); font-weight:550" id="profile-exam-tag">YKS Adayı</p>
+
+          <div class="profile-details-list">
+            <div class="profile-detail-node">
+              <span class="profile-detail-lbl">Seçili Sınav</span>
+              <span class="profile-detail-val" id="profile-lbl-exam">YKS 2027</span>
+            </div>
+            <div class="profile-detail-node">
+              <span class="profile-detail-lbl">Yaş</span>
+              <span class="profile-detail-val" id="profile-lbl-age">18</span>
+            </div>
+            <div class="profile-detail-node">
+              <span class="profile-detail-lbl">Sınıf/Derece</span>
+              <span class="profile-detail-val" id="profile-lbl-grade">12. Sınıf</span>
+            </div>
+            <div class="profile-detail-node">
+              <span class="profile-detail-lbl">Hedef Sıralama</span>
+              <span class="profile-detail-val" id="profile-lbl-target">İlk 30.000</span>
+            </div>
+            <div class="profile-detail-node">
+              <span class="profile-detail-lbl">E-posta</span>
+              <span class="profile-detail-val" id="profile-lbl-email">ahmet@example.com</span>
+            </div>
+          </div>
+
+          <!-- Premium Membership Status Card -->
+          <div style="width:100%; border-top:1px solid var(--border-color); padding-top:1rem; margin-top:0.5rem" id="profile-premium-status-box">
+            <!-- Dynamically populated in app.js -->
+          </div>
+        </div>
+
+        <!-- Right: Edit Form & Reset Actions -->
+        <div class="card-widget" style="display:flex; flex-direction:column; gap:1.75rem">
+          <div>
+            <h3 style="font-family:'Outfit',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-primary)">Profil Bilgilerini Düzenle</h3>
+            <p style="font-size:0.775rem; color:var(--text-muted); margin-top:2px">Bilgilerinizi dilediğiniz zaman güncelleyebilirsiniz.</p>
+          </div>
+
+          <form id="edit-profile-form" class="onboarding-form" style="gap:1.25rem">
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="edit-name">İsim</label>
+                <input type="text" id="edit-name" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="edit-surname">Soyisim</label>
+                <input type="text" id="edit-surname" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="edit-age">Yaş</label>
+                <input type="number" id="edit-age" class="form-input" min="1" max="120" required>
+              </div>
+              <div class="form-group">
+                <label for="edit-grade">Sınıf / Derece</label>
+                <input type="text" id="edit-grade" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-target-ranking">Hedef Derece / Sıralama</label>
+              <input type="text" id="edit-target-ranking" class="form-input" placeholder="Örn: İlk 10.000, İlk 1.000..." required>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-email">E-Posta (Salt Okunur)</label>
+              <input type="email" id="edit-email" class="form-input" readonly style="background-color:var(--bg-hover); color:var(--text-muted); cursor:not-allowed">
+            </div>
+
+            <div class="form-group">
+              <label for="edit-password">Şifre</label>
+              <input type="password" id="edit-password" class="form-input" required>
+            </div>
+
+            <div class="form-group" style="border-top: 1px solid var(--border-color); padding-top:1.25rem">
+              <label for="edit-exam">Hedef Sınav Değiştir</label>
+              <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.5rem">Hedef sınavınızı değiştirdiğinizde ders müfredatı otomatik güncellenir. İlerleme verileriniz korunur.</p>
+              <select id="edit-exam" class="form-input" required>
+                <option value="yks">YKS 2027 (TYT + AYT)</option>
+                <option value="kpss">KPSS 2027 (Lisans / Önlisans)</option>
+                <option value="dgs">DGS 2027 (Dikey Geçiş Sınavı)</option>
+                <option value="mebags">MEB-AGS 2027 (Akademi Giriş)</option>
+                <option value="ales">ALES 2027 (Lisansüstü Giriş)</option>
+                <option value="yokdil">YÖKDİL 2027 (YÖK Dil Sınavı)</option>
+                <option value="yds2">YDS/2 2027 (Yabancı Dil Sınavı)</option>
+                <option value="msu">MSÜ 2027 (Milli Savunma Üni.)</option>
+                <option value="yds1">YDS/1 2027 (İlkbahar Dil Sınavı)</option>
+                <option value="yds">YDS 2027 (Genel Dil Sınavı)</option>
+                <option value="lgs">LGS 2027 (Liselere Geçiş Sınavı)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="form-btn" style="margin-top:0.5rem">Kaydet ve Güncelle</button>
+          </form>
+
+          <div style="border-top:1px solid var(--border-color); padding-top:1.5rem; display:flex; flex-direction:column; gap:0.5rem">
+            <h4 style="font-size:0.875rem; font-weight:700; color:var(--status-danger-text)">⚠️ Tehlikeli Alan</h4>
+            <p style="font-size:0.725rem; color:var(--text-muted)">Mevcut sınavınıza ait tüm konu tamamlama ve değerlendirme verilerinizi sıfırlayabilirsiniz. Bu işlem geri alınamaz.</p>
+            <button class="btn-secondary" style="border-color:var(--status-danger-text); color:var(--status-danger-text); width:fit-content; margin-top:0.25rem" onclick="confirmResetProgress()">
+              🗑️ Sınav İlerlememi Sıfırla
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Site Ayarları (Görünüm & Özelleştirme) Card -->
+      <div class="card-widget" style="margin-top: 1.5rem; display:flex; flex-direction:column; gap:1.5rem;">
+        <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem">
+          <div>
+            <h3 style="font-family:'Outfit',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem">
+              ⚙️ Site Ayarları (Görünüm & Tipografi)
+            </h3>
+            <p style="font-size:0.775rem; color:var(--text-muted); margin-top:2px">Sitedeki tüm yazı tipi, boyut, kutucuk stilleri ve tema tercihlerini özelleştirin.</p>
+          </div>
+          <span class="filter-stat-badge" style="background:var(--accent-light); color:var(--accent); font-weight:700; font-size:0.75rem">Tüm Kullanıcılar İçin</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1.5rem">
+          
+          <!-- 1. Yazı Fontu -->
+          <div class="form-group">
+            <label for="setting-font-family" style="font-weight:600; font-size:0.875rem">🔤 Yazı Fontu (Font Family)</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Tüm sayfadaki metinlerin yazı karakteri stilini değiştirir.</p>
+            <select id="setting-font-family" class="form-input" onchange="saveSiteSettingsFromUI()">
+              <option value="Inter">Inter (Varsayılan - Modern & Net)</option>
+              <option value="Outfit">Outfit (Geometrik & Şık)</option>
+              <option value="Roboto">Roboto (Klasik & Sade)</option>
+              <option value="Poppins">Poppins (Yuvarlak & Yumuşak)</option>
+              <option value="Open Sans">Open Sans (Dengeli & Okunaklı)</option>
+            </select>
+          </div>
+
+          <!-- 2. Kutucuk Tasarımı -->
+          <div class="form-group">
+            <label for="setting-card-style" style="font-weight:600; font-size:0.875rem">📦 Kutucuk Tasarımı (Card Style)</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Kartların köşe kavislerini, gölgelerini ve arka plan stilini belirler.</p>
+            <select id="setting-card-style" class="form-input" onchange="saveSiteSettingsFromUI()">
+              <option value="modern">Modern Kavisli (Soft 20px, Yumuşak Gölgeler)</option>
+              <option value="sharp">Köşeli & Keskin (4px Kavis, Düz Çizgiler)</option>
+              <option value="rounded">Ekstra Yuvarlak (26px Kavis, Derin Gölgeler)</option>
+              <option value="glass">Cam Efekti / Glassmorphism (Buzlu Saydam Cam)</option>
+            </select>
+          </div>
+
+          <!-- 3. Yazı Büyüklüğü -->
+          <div class="form-group">
+            <label for="setting-font-size" style="font-weight:600; font-size:0.875rem">📏 Yazı Büyüklüğü (Font Size)</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Sitedeki genel arayüz metin boyutunu ölçeklendirir.</p>
+            <select id="setting-font-size" class="form-input" onchange="saveSiteSettingsFromUI()">
+              <option value="small">Küçük (%90 / 14px)</option>
+              <option value="normal">Normal (%100 / 16px - Varsayılan)</option>
+              <option value="large">Büyük (%110 / 18px)</option>
+              <option value="xlarge">Ekstra Büyük (%120 / 20px)</option>
+            </select>
+          </div>
+
+          <!-- 4. Tema Seçimi (VIP Temalar Dahil) -->
+          <div class="form-group">
+            <label for="setting-theme" style="font-weight:600; font-size:0.875rem">🎨 Tema & Renk Paleti</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Standart temalar ve VIP özel temalar.</p>
+            <select id="setting-theme" class="form-input" onchange="handleThemeSelectChange(this.value)">
+              <option value="light">☀️ Aydınlık Tema (Light)</option>
+              <option value="dark">🌙 Karanlık Tema (Dark)</option>
+              <option value="sunset">👑 VIP: 🌅 Gün Batımı (Sunset Gold)</option>
+              <option value="ocean">👑 VIP: 🌊 Okyanus Derinliği (Deep Ocean)</option>
+              <option value="cyber">👑 VIP: ⚡ Cyber Neon (Siber Punk)</option>
+              <option value="custom">👑 VIP: 🎛️ Özel Renk Paleti (Custom)</option>
+            </select>
+          </div>
+
+          <!-- 5. Animasyon Hızı -->
+          <div class="form-group">
+            <label for="setting-anim-speed" style="font-weight:600; font-size:0.875rem">⚡ Animasyon Hızı & Efektler</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Arayüz geçiş hızını ve animasyon sürelerini ayarlar.</p>
+            <select id="setting-anim-speed" class="form-input" onchange="saveSiteSettingsFromUI()">
+              <option value="fast">🚀 Hızlı & Akıcı (0.12s)</option>
+              <option value="normal">⚖️ Normal & Dengeli (0.25s - Varsayılan)</option>
+              <option value="slow">🐌 Yavaş & Yumuşak (0.4s)</option>
+              <option value="none">🚫 Animasyonları Kapat (0s)</option>
+            </select>
+          </div>
+
+          <!-- 6. Kenarlık Kalınlığı -->
+          <div class="form-group">
+            <label for="setting-border-width" style="font-weight:600; font-size:0.875rem">🖼️ Kenarlık & Çerçeve Stili</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Kutucukların kenarlık çizgi kalınlığını belirler.</p>
+            <select id="setting-border-width" class="form-input" onchange="saveSiteSettingsFromUI()">
+              <option value="thin">İnce Kenarlık (1px - Varsayılan)</option>
+              <option value="thick">Kalın & Belirgin Kenarlık (2px)</option>
+              <option value="none">Çizgisiz Minimal (0px)</option>
+            </select>
+          </div>
+
+          <!-- 7. Metin Satır Aralığı -->
+          <div class="form-group">
+            <label for="setting-line-height" style="font-weight:600; font-size:0.875rem">📖 Metin Satır Aralığı (Line Height)</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Okunabilirliği artırmak için metin satır mesafesini düzenler.</p>
+            <select id="setting-line-height" class="form-input" onchange="saveSiteSettingsFromUI()">
+              <option value="compact">Sıkı (Compact - 1.35x)</option>
+              <option value="normal">Normal (Standard - 1.5x - Varsayılan)</option>
+              <option value="relaxed">Ferah (Relaxed - 1.75x)</option>
+            </select>
+          </div>
+
+          <!-- 8. Ses Efektleri -->
+          <div class="form-group">
+            <label for="setting-sound-enabled" style="font-weight:600; font-size:0.875rem">🔊 İşlem Geri Bildirim Sesleri</label>
+            <p style="font-size:0.725rem; color:var(--text-muted); margin-bottom:0.4rem">Tıklama ve tamamlama durumlarında hafif ses efekti çalar.</p>
+            <select id="setting-sound-enabled" class="form-input" onchange="saveSiteSettingsFromUI()">
+              <option value="true">🔔 Ses Efektleri Açık</option>
+              <option value="false">🔕 Ses Efektleri Kapalı (Sessiz)</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- KVKK Status Banner -->
+        <div style="background:var(--bg-hover); padding:1rem; border-radius:14px; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:0.5rem">
+          <div style="display:flex; align-items:center; gap:0.65rem">
+            <span style="font-size:1.5rem">📜</span>
+            <div>
+              <strong style="font-size:0.875rem; color:var(--text-primary)">KVKK & Gizlilik Sözleşmesi Durumu</strong>
+              <p style="font-size:0.75rem; color:var(--text-muted)">Kişisel verilerinizin korunması kapsamında onay durumunuz: <span style="color:var(--status-success-text); font-weight:700">✓ Onaylandı</span></p>
+            </div>
+          </div>
+          <button class="btn-secondary" style="font-size:0.8rem; padding:0.45rem 1rem;" onclick="openKvkkModal(event)">Aydınlatma Metnini İncele</button>
+        </div>
+
+        <!-- Custom Theme Color Picker Controls -->
+        <div id="custom-theme-controls" style="display:none; background:var(--bg-hover); padding:1rem; border-radius:14px; border:1px solid var(--border-color); margin-top:0.5rem">
+          <h4 style="font-size:0.875rem; font-weight:700; margin-bottom:0.75rem; color:var(--text-primary)">🎛️ Özel Tema Renk Tasarımcısı</h4>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:1rem">
+            <div class="form-group">
+              <label for="custom-color-accent" style="font-size:0.75rem">Vurgu Rengi (Accent)</label>
+              <input type="color" id="custom-color-accent" value="#8b5cf6" style="width:100%; height:38px; border-radius:8px; cursor:pointer; border:1px solid var(--border-color);" onchange="saveCustomThemeColors()">
+            </div>
+            <div class="form-group">
+              <label for="custom-color-bg" style="font-size:0.75rem">Arka Plan Rengi</label>
+              <input type="color" id="custom-color-bg" value="#0f172a" style="width:100%; height:38px; border-radius:8px; cursor:pointer; border:1px solid var(--border-color);" onchange="saveCustomThemeColors()">
+            </div>
+            <div class="form-group">
+              <label for="custom-color-card" style="font-size:0.75rem">Kart / Sidebar Rengi</label>
+              <input type="color" id="custom-color-card" value="#1e293b" style="width:100%; height:38px; border-radius:8px; cursor:pointer; border:1px solid var(--border-color);" onchange="saveCustomThemeColors()">
+            </div>
+            <div class="form-group">
+              <label for="custom-color-text" style="font-size:0.75rem">Metin Rengi</label>
+              <input type="color" id="custom-color-text" value="#f8fafc" style="width:100%; height:38px; border-radius:8px; cursor:pointer; border:1px solid var(--border-color);" onchange="saveCustomThemeColors()">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Reset Confirm Modal -->
+  <div class="modal-overlay" id="reset-confirm-overlay">
+    <div class="modal-box" style="max-width: 400px">
+      <div class="modal-header" style="border-bottom:none">
+        <h3 style="color:var(--status-danger-text)">Sıfırlama İşlemini Onayla</h3>
+      </div>
+      <div class="modal-body" style="padding-top:0">
+        <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5">
+          Mevcut seçili olan <strong><span id="reset-modal-exam-name">sınav</span></strong> müfredatındaki tüm ilerlemeniz silinecektir. Devam etmek istiyor musunuz?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeResetModal()">Vazgeç</button>
+        <button class="btn-primary" style="background:var(--status-danger-text)" onclick="executeResetProgress()">Evet, Sıfırla</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        initProfilPage();
+      }, 50);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Takvim ve Günlük Planlayıcı</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-layout">
+    
+    <main class="main-content">
+      
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <h1 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem">Aylık Planlama & Takvim</h1>
+        <div style="font-size:0.775rem; color:var(--text-muted); font-weight:600">Anasayfa &gt; Takvim</div>
+      </div>
+
+      <div class="calendar-layout">
+        
+        <!-- Left: Calendar Card -->
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <span class="calendar-title-text" id="calendar-month-title">Ağustos 2026</span>
+            <div style="display:flex; gap:0.5rem">
+              <button class="calendar-nav-btn" onclick="navigateMonth(-1)">&larr;</button>
+              <button class="calendar-nav-btn" onclick="navigateMonth(1)">&rarr;</button>
+            </div>
+          </div>
+
+          <!-- Calendar Grid -->
+          <div class="calendar-grid" id="calendar-days-grid">
+            <!-- Day labels are generated, followed by dates cells -->
+          </div>
+        </div>
+
+        <!-- Right: Day Detail Pane -->
+        <div class="calendar-detail-pane">
+          <div class="calendar-detail-header">
+            <span class="calendar-detail-date" id="selected-date-lbl">Seçili Gün</span>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600; margin-top:4px" id="selected-date-countdown">Sınava Kalan Gün: --</div>
+          </div>
+
+          <!-- Reminders Section -->
+          <div>
+            <h4 style="font-size:0.85rem; font-weight:700; color:var(--text-secondary); margin-bottom:0.5rem">🔔 Günlük Hatırlatma</h4>
+            <div style="display:flex; flex-direction:column; gap:0.5rem">
+              <input type="text" id="reminder-input" class="form-input" placeholder="Hatırlatma notu yazın..." oninput="saveDayReminder()">
+              <p style="font-size:0.7rem; color:var(--text-muted)">Yazılan hatırlatıcı takvim gününde kırmızı nokta ile gösterilir.</p>
+            </div>
+          </div>
+
+          <!-- Day To-Do list -->
+          <div style="border-top:1px solid var(--border-color); padding-top:1.25rem">
+            <h4 style="font-size:0.85rem; font-weight:700; color:var(--text-secondary); margin-bottom:0.75rem">📝 Günlük Yapılacaklar Listesi</h4>
+            
+            <div style="display:flex; gap:0.5rem; margin-bottom:1rem">
+              <input type="text" id="calendar-todo-input" class="form-input" placeholder="Yapılacak iş ekleyin..." onkeydown="handleCalendarTodoKeyDown(event)">
+              <button class="btn-primary" onclick="addCalendarTodoItem()">Ekle</button>
+            </div>
+
+            <div id="calendar-todo-list-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        initCalendarPage();
+      }, 50);
+    });
+  </script>
+</body>
+</html>

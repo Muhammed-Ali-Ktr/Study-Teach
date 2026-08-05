@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Detaylı Analiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-layout">
+    
+    <main class="main-content">
+      
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <h1 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem">İlerleme Analizi</h1>
+        <div style="font-size:0.775rem; color:var(--text-muted); font-weight:600">Anasayfa &gt; İstatistikler</div>
+      </div>
+
+      <!-- 1. Stats Overview Cards -->
+      <div class="stats-strip">
+        <div class="stat-item-box">
+          <div class="stat-item-icon-box" style="background-color:var(--status-success-bg); color:var(--status-success-text)">📊</div>
+          <div class="stat-item-data">
+            <span class="stat-item-num" id="analiz-total-pct">%0</span>
+            <span class="stat-item-lbl">Başarı Oranı</span>
+          </div>
+        </div>
+        <div class="stat-item-box">
+          <div class="stat-item-icon-box" style="background-color:var(--status-info-bg); color:var(--status-info-text)">✅</div>
+          <div class="stat-item-data">
+            <span class="stat-item-num" id="analiz-done-count">0</span>
+            <span class="stat-item-lbl">Tamamlanan Konu</span>
+          </div>
+        </div>
+        <div class="stat-item-box">
+          <div class="stat-item-icon-box" style="background-color:var(--status-warning-bg); color:var(--status-warning-text)">⏳</div>
+          <div class="stat-item-data">
+            <span class="stat-item-num" id="analiz-rem-count">0</span>
+            <span class="stat-item-lbl">Kalan Konu Sayısı</span>
+          </div>
+        </div>
+        <div class="stat-item-box">
+          <div class="stat-item-icon-box" style="background-color:rgba(245, 158, 11, 0.1); color:#f59e0b">⭐</div>
+          <div class="stat-item-data">
+            <span class="stat-item-num" id="analiz-avg-stars">0.0</span>
+            <span class="stat-item-lbl">Ortalama Değerlendirme</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Predictive Score Card -->
+      <div class="card-widget" style="border:1px solid var(--accent); background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%), var(--bg-sidebar);">
+        <div class="card-widget-header">
+          <h3 class="card-widget-title" style="display:flex; align-items:center; gap:0.4rem">🎯 Tahmini Sınav Neti & Sıralama Simülasyonu</h3>
+          <span class="filter-stat-badge" style="background-color:gold; color:#000; font-weight:800; font-size:0.65rem">AI PREMIERE</span>
+        </div>
+        <div id="analiz-predictive-container">
+          <!-- Dynamically populated in app.js -->
+        </div>
+      </div>
+
+      <!-- 2. Dual block layout: Detailed list & Suggestions -->
+      <div class="analytics-block-row">
+        
+        <!-- Left block: Ders Bazlı Detay -->
+        <div class="card-widget">
+          <div class="card-widget-header">
+            <h3 class="card-widget-title">📚 Ders Bazlı İlerleme</h3>
+          </div>
+          <div class="course-progress-list" id="analiz-courses-container" style="gap:1.25rem">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Right block: Weak Subjects & Suggestions -->
+        <div class="card-widget">
+          <div class="card-widget-header">
+            <h3 class="card-widget-title">🚨 Odaklanılması Gereken Zayıf Konular</h3>
+          </div>
+          <p style="font-size:0.775rem; color:var(--text-muted); margin-bottom:1rem; line-height:1.4">Yıldız sayısı düşük olan veya henüz çalışılmamış konular arasından sizin için önceliklendirilmiştir.</p>
+          <div class="suggestions-list" id="analiz-weak-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        initAnalizPage();
+      }, 50);
+    });
+  </script>
+</body>
+</html>

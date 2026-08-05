@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Teach - Notlar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-layout">
+    
+    <main class="main-content">
+      
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <h1 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.6rem">Notlarım</h1>
+        <div style="font-size:0.775rem; color:var(--text-muted); font-weight:600">Anasayfa &gt; Notlar</div>
+      </div>
+
+      <div class="notes-layout">
+        
+        <!-- Left: Notes List Sidebar -->
+        <aside class="notes-list-sidebar">
+          <div class="notes-list-header">
+            <button class="btn-primary" onclick="createNewNote()" style="width: 100%">➕ Yeni Not Ekle</button>
+            <div class="search-input-wrapper" style="width: 100%">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+              <input type="text" id="note-search" class="search-input-field" placeholder="Notlarda ara..." oninput="renderNotesList()">
+            </div>
+          </div>
+
+          <div class="notes-scroll-container" id="notes-list-container">
+            <!-- Dynamic note items loaded here -->
+          </div>
+        </aside>
+
+        <!-- Right: Note Editor Panel -->
+        <section class="notes-editor-pane" id="editor-container">
+          <input type="text" id="note-title" class="note-editor-title-field" placeholder="Not Başlığı..." oninput="autoSaveActiveNote()">
+          <div id="note-date" style="font-size:0.75rem; color:var(--text-muted); font-weight:600; margin-top:-0.5rem">--/--/----</div>
+          <textarea id="note-content" class="note-editor-content-field" placeholder="Notunuzu yazmaya başlayın..." oninput="autoSaveActiveNote()"></textarea>
+          
+          <div class="note-editor-actions">
+            <button class="btn-secondary" style="border-color:var(--status-danger-text); color:var(--status-danger-text)" onclick="deleteActiveNote()">🗑️ Notu Sil</button>
+            <button class="btn-secondary" onclick="exportActiveNote()">📄 Dışa Aktar (TXT)</button>
+            <button class="btn-primary" onclick="saveActiveNoteForce()">💾 Notu Kaydet</button>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+  
+  <script>
+    // Initialize Notes page logic once shared.js loads
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        initNotesPage();
+      }, 50);
+    });
+  </script>
+</body>
+</html>
